@@ -44,5 +44,5 @@ class Module extends CmsModule implements
     public static function dependencies(): array    { return require __DIR__.'/config/dependencies.php'; }
     public static function migrationPath(): string       { return __DIR__.'/migrations'; }
     public static function migrationNamespace(): ?string { return __NAMESPACE__.'\\migrations'; }
-    public static function directories(): array          { return ['@static/origin/Blog','@static/cache/Blog'];}
+    public static function directories(): array          { return ['@static/origin/User','@static/cache/User'];}
 }
