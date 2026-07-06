@@ -52,7 +52,7 @@ class NetworkController extends \yii\web\Controller // TODO выводить в 
             'attach' => [
                 'class' => AuthAction::class,
                 'successCallback' => [$this, 'onAuthSuccess'],
-                'successUrl' => Url::to(['/user/cabinet/default/index'], true),
+                'successUrl' => Url::to(['/User/cabinet/default/index'], true),
             ],
         ];
     }

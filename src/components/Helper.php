@@ -73,7 +73,7 @@ class Helper
     {
         $r = static::normalizeRoute($route);
 
-        if (Yii::$app->getModule('user')->params['onlyRegisteredRoute'] && !isset(static::getRegisteredRoutes()[$r])) {
+        if (Yii::$app->getModule('User')->params['onlyRegisteredRoute'] && !isset(static::getRegisteredRoutes()[$r])) {
             return true;
         }
 
@@ -82,7 +82,7 @@ class Helper
         }
         $userId = $user instanceof User ? $user->getId() : $user;
 
-        if (Yii::$app->getModule('user')->params['strict']) {
+        if (Yii::$app->getModule('User')->params['strict']) {
             if ($user->can($r, $params)) {
                 return true;
             }
@@ -164,8 +164,8 @@ class Helper
                 }
                 self::$_userRoutes[$userId] = $routes;
                 if ($cache) {
-                    $cache->set([__METHOD__, $userId], $routes, Yii::$app->getModule('user')->params['cacheDuration'], new TagDependency([
-                        'tags' => Yii::$app->getModule('user')->params['globalCacheTag'],
+                    $cache->set([__METHOD__, $userId], $routes, Yii::$app->getModule('User')->params['cacheDuration'], new TagDependency([
+                        'tags' => Yii::$app->getModule('User')->params['globalCacheTag'],
                     ]));
                 }
             }
@@ -196,8 +196,8 @@ class Helper
                     }
                 }
                 if ($cache) {
-                    $cache->set($roles, self::$_defaultRoutes, Yii::$app->getModule('user')->params['cacheDuration'], new TagDependency([
-                        'tags' => Yii::$app->getModule('user')->params['globalCacheTag'],
+                    $cache->set($roles, self::$_defaultRoutes, Yii::$app->getModule('User')->params['cacheDuration'], new TagDependency([
+                        'tags' => Yii::$app->getModule('User')->params['globalCacheTag'],
                     ]));
                 }
             }
@@ -245,7 +245,7 @@ class Helper
     public static function invalidate(): void
     {
         if (Yii::$app->getCache() !== null) {
-            TagDependency::invalidate(Yii::$app->getCache(), Yii::$app->getModule('user')->params['globalCacheTag']);
+            TagDependency::invalidate(Yii::$app->getCache(), Yii::$app->getModule('User')->params['globalCacheTag']);
         }
     }
 }

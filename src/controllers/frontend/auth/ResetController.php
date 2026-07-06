@@ -40,7 +40,7 @@ class ResetController extends \yii\web\Controller
             try {
                 $this->service->request($form);
                 Yii::$app->session->setFlash('success', 'На вашу почту выслана инструкция для смены пароля.');
-                return $this->redirect(['/user/auth/auth/login']);
+                return $this->redirect(['/User/auth/auth/login']);
             } catch (Exception $e) {
                 Yii::$app->errorHandler->logException($e);
                 if (YII_DEBUG) {
@@ -76,7 +76,7 @@ class ResetController extends \yii\web\Controller
                 $this->service->reset($token, $form);
                 Yii::$app->session->setFlash('success', 'Новый пароль успешно сохранён.');
                 // TODO если сохранили новый пароль, то можно сразу авторизовать с ним пользователя
-                return $this->redirect(['/user/auth/auth/login']);
+                return $this->redirect(['/User/auth/auth/login']);
             } catch (DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
                 if (YII_DEBUG) {

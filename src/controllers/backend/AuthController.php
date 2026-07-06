@@ -53,7 +53,7 @@ class AuthController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $user = $this->authService->auth($form);
-                $rememberMeDuration = $form->rememberMe ? Yii::$app->getModule('user')->params['rememberMeDuration'] : 0;
+                $rememberMeDuration = $form->rememberMe ? Yii::$app->getModule('User')->params['rememberMeDuration'] : 0;
                 Yii::$app->user->login(new Identity($user), $rememberMeDuration);
                 return $this->goReferer();
             } catch (DomainException $e) {

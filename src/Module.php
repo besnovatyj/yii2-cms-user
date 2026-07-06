@@ -35,7 +35,7 @@ class Module extends CmsModule implements
         }
     }
 
-    public static function moduleId(): string       { return 'user'; }
+    public static function moduleId(): string       { return 'User'; }
     public static function moduleVersion(): string  { return '1.0.0'; }
     public static function isEditable(): bool       { return YII_DEBUG;  }
     public static function adminMenu(): array       { return require __DIR__.'/config/adminMenu.php'; }

@@ -62,7 +62,7 @@ class ProfileController extends \yii\web\Controller
                 if ($emailChanged) {
                     Yii::$app->session->setFlash('success', 'Запрос на смену email отправлен. Пожалуйста, проверьте свою почту.');
                 }
-                return $this->redirect(['/user/cabinet/default/index']);
+                return $this->redirect(['/User/cabinet/default/index']);
             } catch (Exception $e) {
                 Yii::$app->errorHandler->logException($e);
                 if (YII_DEBUG) {
@@ -87,7 +87,7 @@ class ProfileController extends \yii\web\Controller
         try {
             $this->service->confirmPhoneChange(\Yii::$app->user->id, $token);
             Yii::$app->session->setFlash('success', 'Номер телефона изменён.');
-            return $this->redirect(['/user/cabinet/default/index']);
+            return $this->redirect(['/User/cabinet/default/index']);
         } catch (DomainException $e) {
             Yii::$app->errorHandler->logException($e);
             if (YII_DEBUG) {
@@ -104,7 +104,7 @@ class ProfileController extends \yii\web\Controller
         try {
             $this->service->confirmEmail($token);
             Yii::$app->session->setFlash('success', 'E-mail изменён.');
-            return $this->redirect(['/user/cabinet/default/index']);
+            return $this->redirect(['/User/cabinet/default/index']);
         } catch (DomainException $e) {
             Yii::$app->errorHandler->logException($e);
             if (YII_DEBUG) {

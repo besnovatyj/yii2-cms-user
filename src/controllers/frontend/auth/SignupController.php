@@ -59,7 +59,7 @@ class SignupController extends \yii\web\Controller
             try {
                 $this->service->signup($form);
                 Yii::$app->session->setFlash('success', 'Ссылка для подтверждения регистрации выслана на указанный Вами адрес электронной почты.');
-                return $this->redirect(['/user/auth/auth/login']);
+                return $this->redirect(['/User/auth/auth/login']);
             } catch (DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
                 if (YII_DEBUG) {
@@ -89,7 +89,7 @@ class SignupController extends \yii\web\Controller
         try {
             $this->service->confirm($token);
             Yii::$app->session->setFlash('success', 'Ваш аккаунт подтверждён.');
-            return $this->redirect(['/user/auth/auth/login']);
+            return $this->redirect(['/User/auth/auth/login']);
         } catch (DomainException $e) {
             Yii::$app->errorHandler->logException($e);
             if (YII_DEBUG) {

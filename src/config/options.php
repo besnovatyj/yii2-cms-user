@@ -7,11 +7,11 @@
 // Все опции должны быть изначально определены при в конфигурации модуля при подключении в приложение.
 return [
     'user_password_reset_token_expire' => [
-        'path' => 'modules.user.params.passwordResetTokenExpire',
+        'path' => 'modules.User.params.passwordResetTokenExpire',
         'label' => 'User password reset token expire',
-        'description' => 'The time (in seconds) after which it is necessary to re-request the token to reset the user password. (\Yii::$app->getModule(\'user\')->params[\'passwordResetTokenExpire\'])',
+        'description' => 'The time (in seconds) after which it is necessary to re-request the token to reset the user password. (\Yii::$app->getModule(\'User\')->params[\'passwordResetTokenExpire\'])',
         'group' => '',
-        'category' => 'user',
+        'category' => 'User',
         'rules' => [
             ['required'],
             ['integer'],
@@ -21,11 +21,11 @@ return [
         ],
     ],
     'user_rememberMeDuration' => [
-        'path' => 'modules.user.params.rememberMeDuration',
+        'path' => 'modules.User.params.rememberMeDuration',
         'label' => 'Remember me duration',
-        'description' => 'Time (in seconds) after which it is necessary to re-authorize. (Yii::$app->getModule(\'user\')->params[\'rememberMeDuration\'])',
+        'description' => 'Time (in seconds) after which it is necessary to re-authorize. (Yii::$app->getModule(\'User\')->params[\'rememberMeDuration\'])',
         'group' => '',
-        'category' => 'user',
+        'category' => 'User',
         'rules' => [
             ['required'],
             ['integer'],
@@ -35,11 +35,11 @@ return [
         ],
     ],
     'user_cache_duration' => [
-        'path' => 'modules.user.params.cacheDuration',
+        'path' => 'modules.User.params.cacheDuration',
         'label' => 'Время жизни кеша для тяжелых операций (Список всех маршрутов приложения через сканирование всех контроллёров всех модулей)',
-        'description' => 'Yii::$app->getModule(\'user\')->params[\'cacheDuration\']',
+        'description' => 'Yii::$app->getModule(\'User\')->params[\'cacheDuration\']',
         'group' => '',
-        'category' => 'user',
+        'category' => 'User',
         'rules' => [
             ['required'],
             ['integer'],
@@ -49,11 +49,11 @@ return [
         ],
     ],
     'user_userTable' => [
-        'path' => 'modules.user.params.userTable',
+        'path' => 'modules.User.params.userTable',
         'label' => 'Users table',
-        'description' => 'Yii::$app->getModule(\'user\')->params[\'userTable\']',
+        'description' => 'Yii::$app->getModule(\'User\')->params[\'userTable\']',
         'group' => '',
-        'category' => 'user',
+        'category' => 'User',
         'rules' => [
             ['required'],
             ['string'],
@@ -63,11 +63,11 @@ return [
         ],
     ],
     'user_defaultUserStatus' => [
-        'path' => 'modules.user.params.defaultUserStatus',
+        'path' => 'modules.User.params.defaultUserStatus',
         'label' => 'Default User Status',
-        'description' => 'Yii::$app->getModule(\'user\')->params[\'defaultUserStatus\']',
+        'description' => 'Yii::$app->getModule(\'User\')->params[\'defaultUserStatus\']',
         'group' => '',
-        'category' => 'user',
+        'category' => 'User',
         'rules' => [
             ['required'],
             ['integer'],
@@ -81,11 +81,11 @@ return [
         ],
     ],
     'user_userRolePageSize' => [
-        'path' => 'modules.user.params.userRolePageSize',
+        'path' => 'modules.User.params.userRolePageSize',
         'label' => 'Size of user roles page',
-        'description' => 'Yii::$app->getModule(\'user\')->params[\'userRolePageSize\']',
+        'description' => 'Yii::$app->getModule(\'User\')->params[\'userRolePageSize\']',
         'group' => '',
-        'category' => 'user',
+        'category' => 'User',
         'rules' => [
             ['required'],
             ['integer'],
@@ -95,11 +95,11 @@ return [
         ],
     ],
     'user_onlyRegisteredRoute' => [
-        'path' => 'modules.user.params.onlyRegisteredRoute',
+        'path' => 'modules.User.params.onlyRegisteredRoute',
         'label' => 'If true then AccessControl only check if route are registered',
-        'description' => 'Yii::$app->getModule(\'user\')->params[\'onlyRegisteredRoute\']',
+        'description' => 'Yii::$app->getModule(\'User\')->params[\'onlyRegisteredRoute\']',
         'group' => '',
-        'category' => 'user',
+        'category' => 'User',
         'rules' => [
             ['required'],
             ['boolean'],
@@ -113,11 +113,11 @@ return [
         ],
     ],
     'user_strict' => [
-        'path' => 'modules.user.params.strict',
+        'path' => 'modules.User.params.strict',
         'label' => 'If false then AccessControl will check without Rule',
-        'description' => 'Yii::$app->getModule(\'user\')->params[\'strict\']',
+        'description' => 'Yii::$app->getModule(\'User\')->params[\'strict\']',
         'group' => '',
-        'category' => 'user',
+        'category' => 'User',
         'rules' => [
             ['required'],
             ['boolean'],
@@ -131,11 +131,11 @@ return [
         ],
     ],
     'user_globalCacheTag' => [
-        'path' => 'modules.user.params.globalCacheTag',
+        'path' => 'modules.User.params.globalCacheTag',
         'label' => 'globalCacheTag',
-        'description' => 'Yii::$app->getModule(\'user\')->params[\'globalCacheTag\']',
+        'description' => 'Yii::$app->getModule(\'User\')->params[\'globalCacheTag\']',
         'group' => '',
-        'category' => 'user',
+        'category' => 'User',
         'rules' => [
             ['required'],
             ['string'],

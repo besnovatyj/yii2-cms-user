@@ -120,7 +120,7 @@ class RouteManageService
             return $this->cache->getOrSet($key, function () use ($result) {
                 $this->getRouteRecursive(Yii::$app, $result);
                 return $result;
-            }, Yii::$app->getModule('user')->params['cacheDuration']);
+            }, Yii::$app->getModule('User')->params['cacheDuration']);
         }
         $this->cache->delete($key);
         $this->getRouteRecursive(Yii::$app, $result);

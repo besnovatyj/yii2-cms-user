@@ -51,7 +51,7 @@ class DefaultController extends \yii\web\Controller
     {
 //        if (!\Yii::$app->getUser()->identity->isProfileCorrectlyFilled()) {
 //            \Yii::$app->session->addFlash('error', 'Пожалуйста, заполните свой профиль!');
-//            $this->redirect(['/user/cabinet/profile/edit']);
+//            $this->redirect(['/User/cabinet/profile/edit']);
 //        }
 
         $user = $this->repo->getActiveById(Yii::$app->user->id);

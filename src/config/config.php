@@ -5,7 +5,7 @@
  */
 
 return [
-    'id' => 'user',
+    'id' => 'User',
     'params' => [
         'iconClass' => 'bi bi-people',
 

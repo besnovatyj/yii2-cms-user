@@ -178,7 +178,7 @@ class UserController extends Controller
         try {
             $this->service->activate($id);
             Yii::$app->session->setFlash('success', 'Пользователь разблокирован.');
-            return $this->redirect(['/user/backend/user/view', 'id' => $id]);
+            return $this->redirect(['/User/backend/user/view', 'id' => $id]);
         } catch (Exception $e) {
             $this->handleDomainException($e);
         }
@@ -196,7 +196,7 @@ class UserController extends Controller
         try {
             $this->service->block($id);
             Yii::$app->session->setFlash('danger', 'Пользователь заблокирован.');
-            return $this->redirect(['/user/backend/user/view', 'id' => $id]);
+            return $this->redirect(['/User/backend/user/view', 'id' => $id]);
         } catch (Exception $e) {
             $this->handleDomainException($e);
         }

@@ -24,7 +24,7 @@ class UserPasswordResetRequestedListener
     {
         $sent = $this->mailer
             ->compose(
-                ['html' => 'user/auth/reset/request-html', 'text' => 'user/auth/reset/request-text'],
+                ['html' => 'User/auth/reset/request-html', 'text' => 'User/auth/reset/request-text'],
                 ['user' => $event->user]
             )
             ->setTo($event->user->email)

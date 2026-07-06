@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $networkList = function () use ($model) {
     $out = '<table class="table table-bordered">';
     foreach ($model->networks as $network) {
-        $link = Html::a('Открепить', ['/user/backend/network/detach', 'network_id' => $network->id], ['data-method' => 'POST']);
+        $link = Html::a('Открепить', ['/User/backend/network/detach', 'network_id' => $network->id], ['data-method' => 'POST']);
         $out .= '<tr><td>' . $network->network . $network->identity . '</td><td>' . $link . '</td></tr>';
     }
     $out .= '</table>';
@@ -34,7 +34,7 @@ $networkList = function () use ($model) {
 <p>
     <?= Html::a(Yii::t('rbac-admin', 'Update profile'), ['update', 'id' => $model->id], ['class' => 'btn  btn-success']) ?>
 
-    <?= Html::a(Yii::t('rbac-admin', 'Role assignments'), ['/user/backend/assignment/view', 'id' => $model->id], ['class' => 'btn  btn-warning']) ?>
+    <?= Html::a(Yii::t('rbac-admin', 'Role assignments'), ['/User/backend/assignment/view', 'id' => $model->id], ['class' => 'btn  btn-warning']) ?>
 
     <?= Html::a('Update password', ['password-update', 'id' => $model->id], ['class' => 'btn  btn-warning']) ?>
     <?php if ($model->isActive()): ?>
@@ -90,7 +90,7 @@ $networkList = function () use ($model) {
                     'attribute' => 'email_confirm_token',
                     'value' => function (User $model) {
                         if ($model->email_confirm_token) {
-                            return Html::a('<span class="btn btn-sm btn-warning">Reset</span>', \yii\helpers\Url::to(['/user/backend/user/reset-email-confirm-token', 'id' => $model->id]));
+                            return Html::a('<span class="btn btn-sm btn-warning">Reset</span>', \yii\helpers\Url::to(['/User/backend/user/reset-email-confirm-token', 'id' => $model->id]));
                         }
                         return $model->email_confirm_token;
                     },
@@ -100,7 +100,7 @@ $networkList = function () use ($model) {
                     'attribute' => 'password_reset_token',
                     'value' => function (User $model) {
                         if ($model->password_reset_token) {
-                            return Html::a('<span class="btn btn-sm btn-warning">Reset</span>', \yii\helpers\Url::to(['/user/backend/user/reset-password-reset-token', 'id' => $model->id]));
+                            return Html::a('<span class="btn btn-sm btn-warning">Reset</span>', \yii\helpers\Url::to(['/User/backend/user/reset-password-reset-token', 'id' => $model->id]));
                         }
                         return $model->password_reset_token;
                     },

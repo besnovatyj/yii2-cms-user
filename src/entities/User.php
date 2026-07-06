@@ -268,7 +268,7 @@ class User extends ActiveRecord implements AggregateRoot
      */
     public static function isPasswordResetTokenValid(string $token): bool
     {
-        $expire = Yii::$app->getModule('user')->params['passwordResetTokenExpire'];
+        $expire = Yii::$app->getModule('User')->params['passwordResetTokenExpire'];
         $parts = explode('_', $token);
         $timestamp = (int)end($parts);
         return $timestamp + $expire >= time();

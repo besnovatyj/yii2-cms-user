@@ -23,7 +23,7 @@ class UserEditEmailRequestedListener
     {
         $sent = $this->mailer
             ->compose(
-                ['html' => 'user/auth/editEmail/request-html', 'text' => 'user/auth/editEmail/request-text'],
+                ['html' => 'User/auth/editEmail/request-html', 'text' => 'User/auth/editEmail/request-text'],
                 ['user' => $event->user]
             )
             ->setTo($event->user->new_email)

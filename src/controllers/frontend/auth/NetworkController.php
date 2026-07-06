@@ -36,7 +36,7 @@ class NetworkController extends \yii\web\Controller
             'auth' => [
                 'class' => AuthAction::class,
                 'successCallback' => [$this, 'onAuthSuccess'],
-                'successUrl' => Url::to(['/user/backend/cabinet/default/index'], true),
+                'successUrl' => Url::to(['/User/backend/cabinet/default/index'], true),
             ],
         ];
     }
@@ -49,7 +49,7 @@ class NetworkController extends \yii\web\Controller
 
         try {
             $user = $this->service->auth($network, $identity);
-            Yii::$app->user->login(new Identity($user), Yii::$app->getModule('user')->params['rememberMeDuration']);
+            Yii::$app->user->login(new Identity($user), Yii::$app->getModule('User')->params['rememberMeDuration']);
         } catch (\DomainException $e) {
             Yii::$app->errorHandler->logException($e);
             if (YII_DEBUG) {

@@ -23,7 +23,7 @@ class UserSignupRequestedListener
     {
         $sent = $this->mailer
             ->compose(
-                ['html' => 'user/auth/signup/request-html', 'text' => 'user/auth/signup/request-text'],
+                ['html' => 'User/auth/signup/request-html', 'text' => 'User/auth/signup/request-text'],
                 ['user' => $event->user]
             )
             ->setTo($event->user->email)

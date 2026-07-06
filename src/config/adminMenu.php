@@ -9,9 +9,9 @@ return [
     [
         'label' => 'Users list',
         'iconClass' => 'bi bi-list-ol me-1',
-        'url' => ['/user/backend/user/index'],
+        'url' => ['/User/backend/user/index'],
         'active' => static function () {
-            return str_contains(Yii::$app->request->url, 'user/backend/user');
+            return str_contains(Yii::$app->request->url, 'User/backend/user');
         },
         '_meta' => [
             'placements' => [
@@ -30,9 +30,9 @@ return [
     [
         'label' => 'Routes',
         'iconClass' => 'bi bi-sign-turn-right me-1',
-        'url' => ['/user/backend/route/index'],
+        'url' => ['/User/backend/route/index'],
         'active' => static function () {
-            return str_contains(Yii::$app->request->url, 'user/backend/route');
+            return str_contains(Yii::$app->request->url, 'User/backend/route');
         },
         '_meta' => [
             'placements' => [
@@ -51,9 +51,9 @@ return [
     [
         'label' => 'Permissions',
         'iconClass' => 'bi bi-check2-all me-1',
-        'url' => ['/user/backend/permission/index'],
+        'url' => ['/User/backend/permission/index'],
         'active' => static function () {
-            return str_contains(Yii::$app->request->url, 'user/backend/permission');
+            return str_contains(Yii::$app->request->url, 'User/backend/permission');
         },
         '_meta' => [
             'placements' => [
@@ -72,9 +72,9 @@ return [
     [
         'label' => 'Roles',
         'iconClass' => 'bi bi-person-gear me-1',
-        'url' => ['/user/backend/role/index'],
+        'url' => ['/User/backend/role/index'],
         'active' => static function () {
-            return str_contains(Yii::$app->request->url, 'user/backend/role');
+            return str_contains(Yii::$app->request->url, 'User/backend/role');
         },
         '_meta' => [
             'placements' => [
@@ -93,9 +93,9 @@ return [
     [
         'label' => 'Rules',
         'iconClass' => 'bi bi-filetype-php me-1',
-        'url' => ['/user/backend/rule/index'],
+        'url' => ['/User/backend/rule/index'],
         'active' => static function () {
-            return str_contains(Yii::$app->request->url, 'user/backend/rule');
+            return str_contains(Yii::$app->request->url, 'User/backend/rule');
         },
         '_meta' => [
             'placements' => [
@@ -114,9 +114,9 @@ return [
     [
         'label' => 'Assignments',
         'iconClass' => 'bi bi-arrows me-1',
-        'url' => ['/user/backend/assignment/index'],
+        'url' => ['/User/backend/assignment/index'],
         'active' => static function () {
-            return str_contains(Yii::$app->request->url, 'user/backend/assignment');
+            return str_contains(Yii::$app->request->url, 'User/backend/assignment');
         },
         '_meta' => [
             'placements' => [
