@@ -56,7 +56,7 @@ class UserEditForm extends CompositeForm
             ['username', 'required'],
             ['username', 'string', 'min' => 2, 'max' => 255],
             ['username', 'unique', 'targetClass' => User::class, 'filter' => ['<>', 'id', $this->_user->id], 'message' => 'Данный логин уже занят.'],
-            ['username', UsernameValidator::class],
+            ['username', UsernameValidator::class, 'targetClass' => User::class, 'filter' => ['<>', 'id', $this->_user->id]],
             ['username', 'string', 'min' => 3, 'max' => 255],
 
             ['email', 'required'],

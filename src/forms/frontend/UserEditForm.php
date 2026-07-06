@@ -1,6 +1,5 @@
 <?php
 
-
 /*
  * Copyright (c) 2026 Besnovatyj. Licensed under the MIT License.
  */
@@ -8,9 +7,10 @@
 namespace Besnovatyj\User\forms\frontend;
 
 use Besnovatyj\Forms\CompositeForm;
+use Besnovatyj\Helpers\phone\PhoneValidator;
 use Besnovatyj\User\entities\Profile;
 use Besnovatyj\User\entities\User;
-use Besnovatyj\User\forms\frontend\ProfileEditForm;
+use Besnovatyj\User\validators\UsernameValidator;
 
 /**
  * @property Profile $profile
@@ -39,8 +39,8 @@ class UserEditForm extends CompositeForm
             [['email',], 'required'],
             ['email', 'email'],
             [['email', 'username'], 'string', 'max' => 255],
-//            ['username', UsernameValidator::class],
-//          ['phone', PhoneValidator::class],
+            ['username', UsernameValidator::class],
+            ['phone', PhoneValidator::class],
             [['phone', 'email', 'username'], 'unique', 'targetClass' => User::class, 'filter' => ['!=', 'id', $this->_user->id]],
         ];
     }

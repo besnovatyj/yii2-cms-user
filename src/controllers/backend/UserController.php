@@ -137,7 +137,7 @@ class UserController extends Controller
     public function actionDelete(int $id): Response
     {
         try {
-            $this->service->remove($id); // todo - удалять профайл при удалении юзера
+            $this->service->remove($id);
         } catch (Throwable $e) {
             $this->handleDomainException($e);
         }

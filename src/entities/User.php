@@ -371,7 +371,6 @@ class User extends ActiveRecord implements AggregateRoot
 
     public function afterDelete(): void
     {
-        // TODO - удалять профайл при удалении юзера
         $this->recordEvent(new UserDeleted($this));
         parent::afterDelete();
     }
