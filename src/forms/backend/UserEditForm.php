@@ -7,14 +7,17 @@
 
 namespace Besnovatyj\User\forms\backend;
 
+use Besnovatyj\Forms\CompositeForm;
 use Besnovatyj\Helpers\phone\PhoneValidator;
 use Besnovatyj\User\entities\User;
 use Besnovatyj\User\validators\UsernameValidator;
 use Yii;
-use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
-class UserEditForm extends Model
+/**
+ * @property ProfileForm $profile
+ */
+class UserEditForm extends CompositeForm
 {
     public string $username = '';
     public string $email = '';
@@ -35,6 +38,7 @@ class UserEditForm extends Model
         $roles = Yii::$app->authManager->getRolesByUser($user->id);
         $this->role = $roles ? reset($roles)->name : null;
         $this->_user = $user;
+        $this->profile = new ProfileForm($user->profile);
         parent::__construct($config);
     }
 
@@ -88,5 +92,10 @@ class UserEditForm extends Model
             'description' => 'Описание',
             'role' => 'Роль',
         ];
+    }
+
+    protected function internalForms(): array
+    {
+        return ['profile'];
     }
 }

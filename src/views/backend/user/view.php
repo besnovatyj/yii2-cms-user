@@ -7,6 +7,7 @@
 
 use Besnovatyj\User\entities\User;
 use Besnovatyj\User\helpers\UserHelper;
+use Besnovatyj\User\helpers\UserProfileHelper;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
@@ -118,5 +119,42 @@ $networkList = function () use ($model) {
     <div class="card-footer clearfix">
 
     </div>
+</div>
+<!-- /.card -->
+
+<div class="card">
+    <div class="card-header">Профиль</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-8">
+                <?php if ($model->profile): ?>
+                    <?= DetailView::widget([
+                        'model' => $model->profile,
+                        'attributes' => [
+                            'firstName',
+                            'lastName',
+                            [
+                                'attribute' => 'sex',
+                                'value' => UserProfileHelper::sexName($model->profile->sex),
+                            ],
+                        ],
+                    ]) ?>
+                <?php else: ?>
+                    <p class="text-muted">Профиль ещё не заполнен.</p>
+                <?php endif; ?>
+            </div>
+            <div class="col-md-4">
+                <?php if ($model->profile && $model->profile->photo): ?>
+                    <?= Html::a(
+                        Html::img($model->profile->getThumbUrl('photo', 'thumb'), ['class' => 'img-fluid']),
+                        $model->profile->getUploadUrl('photo'),
+                        ['target' => '_blank']
+                    ) ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer clearfix"></div>
 </div>
 <!-- /.card -->

@@ -69,6 +69,15 @@ class m250430_171719_create_user_foreign_key_constraints extends BaseMigration
             'CASCADE',
         );
 
+        // users_profiles
+        $this->createFKs(
+            m250430_171717_create_users_profiles_table::TABLE_NAME,
+            'user_id',
+            m250430_171715_create_users_table::TABLE_NAME,
+            'id',
+            'CASCADE',
+        );
+
 
         Yii::$app->db->createCommand('SET foreign_key_checks = 1')->execute();
 

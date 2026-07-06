@@ -31,18 +31,13 @@ composer require besnovatyj/yii2-cms-user
 
 `php >=8.4`, `ext-mbstring`, `yiisoft/yii2`, `yiisoft/yii2-bootstrap5`, и пакеты экосистемы:
 `kernel`, `contracts`, `helpers`, `backend-widgets` (Backend\Widgets), `forms` (Forms + CompositeForm),
-`smart-domain-events`, `altcha-widget`, `datetime-widgets`, `oauth2`.
+`smart-domain-events`, `altcha-widget`, `datetime-widgets`, `oauth2`, `upload` (загрузка фото профиля).
 
 - Зависимость на **`oauth2`**: `Identity` валидирует Bearer-токены через `ResourceServer`/`Psr7Factory`
   (REST-аутентификация). Обратная связь oauth2 → user (репозиторий password-grant) реализована как
   мягкая, через DI-контейнер, и в composer НЕ объявлена — цикла нет.
-
-## ⚠️ Остаточная зависимость от ядра (B1.1)
-
-`src/entities/Profile.php` использует `common\components\upload\behaviors\ImageUploadBehavior` —
-класса нет в текущем ядре (фантомная зависимость, общий блокер B1.1 в `GITHUB_MIGRATION_READINESS.md`).
-Закрывается вместе с выносом upload-поведения в пакет `besnovatyj/yii2-cms-upload`; после этого
-переключить `use` и добавить зависимость.
+- Зависимость на **`upload`**: `Profile` использует `Besnovatyj\Upload\heap\UploadBehavior`
+  для фото профиля с превью (профили `admin`, `thumb`) — аналогично сущности поста блога.
 
 ## Лицензия
 

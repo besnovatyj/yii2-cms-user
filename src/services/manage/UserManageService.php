@@ -9,12 +9,15 @@ namespace Besnovatyj\User\services\manage;
 
 use DomainException;
 use Besnovatyj\User\components\Rbac;
+use Besnovatyj\User\entities\Profile;
 use Besnovatyj\User\entities\User;
 use Besnovatyj\User\forms\backend\PasswordEditForm;
+use Besnovatyj\User\forms\backend\ProfileForm;
 use Besnovatyj\User\forms\backend\UserCreateForm;
 use Besnovatyj\User\forms\backend\UserEditForm;
 use Besnovatyj\User\repositories\UserRepository;
 use Throwable;
+use Yii;
 use yii\base\Exception;
 use yii\db\StaleObjectException;
 
@@ -49,6 +52,7 @@ class UserManageService
     }
 
     /**
+     * @throws Throwable
      * @throws \yii\db\Exception
      */
     public function edit($id, UserEditForm $form): void
@@ -61,9 +65,40 @@ class UserManageService
             $form->description
         );
 
-        $this->repository->save($user);
-        $this->roles->assign($user->id, $form->role);
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            $this->repository->save($user);
+            $this->roles->assign($user->id, $form->role);
+            $this->saveProfile($user->id, $form->profile);
 
+            $transaction->commit();
+        } catch (Throwable $e) {
+            $transaction->rollBack();
+            throw $e;
+        }
+    }
+
+    /**
+     * Создаёт или обновляет профиль пользователя, включая загрузку фото.
+     * @throws \yii\db\Exception
+     */
+    private function saveProfile(int $userId, ProfileForm $form): void
+    {
+        $profile = Profile::findOne(['user_id' => $userId]);
+
+        if ($profile) {
+            $profile->edit($form->sex, $form->firstName, $form->lastName);
+        } else {
+            $profile = Profile::create($userId, $form->sex, $form->firstName, $form->lastName);
+        }
+
+        if ($form->photo) {
+            $profile->setPhoto($form->photo);
+        }
+
+        if (!$profile->save()) {
+            throw new \yii\db\Exception('Ошибка сохранения профиля.');
+        }
     }
 
     /**
@@ -135,10 +170,30 @@ class UserManageService
         if ($user->isRoot()) {
             throw new DomainException('Нельзя удалить root-пользователя.');
         }
-        // TODO - удалять профайл при удалении юзера
-        // TODO - Обернуть всё в транзакцию
-        $this->revokeAllRoles($id);
-        $this->repository->remove($user);
+
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            $this->revokeAllRoles($id);
+            $this->removeProfile($id);
+            $this->repository->remove($user);
+
+            $transaction->commit();
+        } catch (Throwable $e) {
+            $transaction->rollBack();
+            throw $e;
+        }
+    }
+
+    /**
+     * Удаляет профиль пользователя вместе с загруженными файлами.
+     * Удаление через delete() запускает UploadBehavior::beforeDelete и чистит фото/превью.
+     * @throws Throwable
+     * @throws StaleObjectException
+     */
+    private function removeProfile(int $userId): void
+    {
+        $profile = Profile::findOne(['user_id' => $userId]);
+        $profile?->delete();
     }
 
     /**
