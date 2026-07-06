@@ -7,7 +7,7 @@
 
 namespace Besnovatyj\User\forms\frontend;
 
-use Besnovatyj\CompositeForm\CompositeForm;
+use Besnovatyj\Forms\CompositeForm;
 use Besnovatyj\Helpers\phone\PhoneValidator;
 use Besnovatyj\User\entities\Profile;
 use Besnovatyj\User\entities\User;
