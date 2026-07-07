@@ -1,7 +1,6 @@
 {
   "name": "besnovatyj/yii2-cms-user",
   "description": "Модуль пользователей, аутентификации и RBAC для Yii2 CMS (User/Identity, кабинет, вход/регистрация/сброс пароля, менеджер ролей и правил).",
-  "version": "1.0.0",
   "type": "yii2-extension",
   "license": "MIT",
   "authors": [
