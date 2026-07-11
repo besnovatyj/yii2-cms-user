@@ -17,8 +17,9 @@ use Besnovatyj\User\security\RbacAuthorizer;
  *  - `accessAuthorizer` DenyAllAuthorizer → {@see RbacAuthorizer} (гейт начинает пускать по правам RBAC);
  *  - `allowActions` — маршруты входа/выхода в whitelist гейта.
  *
- * Модуль НЕ трогает сам гейт (`as access`) — он принадлежит ядру. Разрешены только ключи
- * `components` и `allowActions` (см. ProvidesAppConfig); компилятор игнорирует всё прочее.
+ * Вклад — частичное дерево конфига приложения (ключи 1:1 с Yii). Класс гейта `as access.class`
+ * модуль не задаёт: он принадлежит ядру, а allowlist-политика компилятора всё равно вырезала бы его
+ * (см. ProvidesAppConfig). Модуль лишь ДОПОЛНЯЕТ `as access.allowActions` маршрутами входа/выхода.
  *
  * frontend — открытое приложение (гейта нет): здесь достаточно подменить identityClass, чтобы
  * работали вход и личный кабинет.
@@ -32,9 +33,11 @@ return [
             ],
             'accessAuthorizer' => ['class' => RbacAuthorizer::class],
         ],
-        'allowActions' => [
-            'User/auth/login',
-            'User/auth/logout',
+        'as access' => [
+            'allowActions' => [
+                'User/auth/login',
+                'User/auth/logout',
+            ],
         ],
     ],
     'app-rest' => [
