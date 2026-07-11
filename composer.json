@@ -13,7 +13,13 @@
   "extra": {
     "moduleClass": "Besnovatyj\\User\\Module",
     "moduleId": "User",
-    "bescms": { "kind": "module" }
+    "bescms": { "kind": "module" },
+    "config-plugin": {
+      "common": "src/config/common.php",
+      "app-backend": "src/config/backend.php",
+      "app-frontend": "src/config/frontend.php",
+      "app-rest": "src/config/rest.php"
+    }
   },
   "keywords": [
     "yii2",
