@@ -15,6 +15,7 @@
     "moduleId": "User",
     "bescms": { "kind": "module" },
     "config-plugin": {
+      "admin-menu": "src/config/adminMenu.php",
       "common": "src/config/common.php",
       "app-backend": "src/config/backend.php",
       "app-frontend": "src/config/frontend.php",
