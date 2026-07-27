@@ -37,8 +37,9 @@ $this->context->layout = '@app/views/layouts/blank';
         <?= \Besnovatyj\Altcha\widgets\AltchaWidget::widget([
             'name' => 'altcha',
             'challengeUrl' => \yii\helpers\Url::to(['/Altcha/backend/altcha-challenge/challenge']),
-            'options' => [ // сюда можно класть любые атрибуты <altcha-widget>
-//                'hidefooter' => true,
+            'options' => [ // сюда можно класть любые опции <altcha-widget>
+                'hideFooter' => true,
+                'hideLogo' => true,
             ],
         ]); ?>
     </div>
