@@ -7,60 +7,47 @@
 
 namespace Besnovatyj\User\helpers;
 
-use Exception;
 use Besnovatyj\User\components\Rbac;
 use Besnovatyj\User\components\UserStatus;
-use yii\helpers\ArrayHelper;
+use Besnovatyj\User\entities\User;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
 class UserHelper
 {
     /**
-     * @throws Exception
+     * Название статуса. Принимает как сам статус, так и его числовое значение
+     * (например, из GET-параметра фильтра).
      */
-    public static function statusName($status): string
+    public static function statusName(UserStatus|int|string|null $status): string
     {
-        return ArrayHelper::getValue(self::statusList(), $status);
-    }
-
-    public static function statusList(): array
-    {
-        return [
-            UserStatus::STATUS_WAIT => 'Ожидает',
-            UserStatus::STATUS_ACTIVE => 'Активный',
-            UserStatus::STATUS_BLOCKED => 'Заблокирован',
-        ];
+        if (!$status instanceof UserStatus) {
+            if ($status === null || $status === '') {
+                return '';
+            }
+            $status = UserStatus::tryFrom((int)$status);
+        }
+        return $status?->label() ?? '';
     }
 
     /**
-     * @throws Exception
+     * Список статусов для фильтров и выпадающих списков.
+     * @return array<int, string>
      */
-    public static function statusLabel($model): string // TODO уже 8 раза повторяется... в трейт,?
+    public static function statusList(): array
     {
-        switch ($model->status) {
-            case UserStatus::STATUS_WAIT:
-                $class = 'badge bg-secondary';
-                $action = 'activate';
-                $confirmMessage = 'Активировать пользователя?';
-                break;
-            case UserStatus::STATUS_ACTIVE:
-                $class = 'badge bg-success';
-                $action = 'block';
-                $confirmMessage = 'Блокировать пользователя?';
-                break;
-            case UserStatus::STATUS_BLOCKED:
-                $class = 'badge bg-danger';
-                $action = 'activate';
-                $confirmMessage = 'Активировать пользователя?';
-                break;
-            default:
-                $class = 'badge bg-secondary';
-                $action = 'activate';
-                $confirmMessage = 'Активировать пользователя?';
-        }
+        return UserStatus::labels();
+    }
 
-        $text = Html::tag('span', ArrayHelper::getValue(self::statusList(), $model->status), [
+    public static function statusLabel(User $model): string // TODO уже 8 раза повторяется... в трейт,?
+    {
+        [$class, $action, $confirmMessage] = match ($model->status) {
+            UserStatus::STATUS_ACTIVE => ['badge bg-success', 'block', 'Блокировать пользователя?'],
+            UserStatus::STATUS_BLOCKED => ['badge bg-danger', 'activate', 'Активировать пользователя?'],
+            default => ['badge bg-secondary', 'activate', 'Активировать пользователя?'],
+        };
+
+        $text = Html::tag('span', self::statusName($model->status), [
             'class' => $class,
         ]);
         $url = Url::to([$action, 'id' => $model->id]);

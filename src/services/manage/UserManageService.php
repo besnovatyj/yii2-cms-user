@@ -7,8 +7,8 @@
 
 namespace Besnovatyj\User\services\manage;
 
-use DomainException;
 use Besnovatyj\User\components\Rbac;
+use Besnovatyj\User\components\UserStatus;
 use Besnovatyj\User\entities\Profile;
 use Besnovatyj\User\entities\User;
 use Besnovatyj\User\forms\backend\PasswordEditForm;
@@ -16,6 +16,7 @@ use Besnovatyj\User\forms\backend\ProfileForm;
 use Besnovatyj\User\forms\backend\UserCreateForm;
 use Besnovatyj\User\forms\backend\UserEditForm;
 use Besnovatyj\User\repositories\UserRepository;
+use DomainException;
 use Throwable;
 use Yii;
 use yii\base\Exception;
@@ -43,6 +44,7 @@ class UserManageService
             $form->phone,
             $form->description,
             !empty($form->password) ? $form->password : \Yii::$app->security->generateRandomString(),
+            UserStatus::from((int)Yii::$app->getModule('User')->params['defaultUserStatus']),
         );
 
         $this->repository->save($user);

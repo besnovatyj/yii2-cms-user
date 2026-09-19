@@ -48,7 +48,7 @@ class ProfileController extends Controller
                 'updated' => $user->updated_at,
             ],
             'status' => [
-                'code' => $user->status,
+                'code' => $user->status?->value,
                 'name' => UserHelper::statusName($user->status),
             ],
         ];

@@ -7,6 +7,7 @@
 
 namespace Besnovatyj\User\services\manage;
 
+use Besnovatyj\User\components\Helper;
 use Exception;
 use ReflectionClass;
 use Yii;
@@ -82,6 +83,9 @@ class RouteManageService
             $item = $this->authManager->createPermission($route);
             $this->authManager->remove($item);
         }
+        // Состав маршрутов входит в кешированные списки прав пользователей (Helper::getRoutesByUser)
+        Helper::invalidate();
+
         return $this->getRoutes(true);
     }
 
@@ -104,6 +108,9 @@ class RouteManageService
             $item = $this->authManager->createPermission($route);
             $this->authManager->add($item);
         }
+        // Регистрация маршрута меняет права: снимаем кешированные списки, как это делают
+        // остальные операции RBAC (см. AuthItem::save(), AssignmentManageService)
+        Helper::invalidate();
     }
 
     /**

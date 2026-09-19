@@ -294,14 +294,11 @@ class AuthItem extends Model
             $manager = Yii::$app->getAuthManager();
             $ids = $manager->getUserIdsByRole($this->name);
 
-            // Получаем размер страницы из конфига
-            $pageSize = Yii::$app->getModule('User')->params['userRolePageSize'] ?? 10;
-
             // Создаём провайдер с указанием текущей страницы
             $provider = new ArrayDataProvider([
                 'allModels' => $ids,
                 'pagination' => [
-                    'pageSize' => $pageSize,
+                    'pageSize' => 30,
                 ],
             ]);
 

@@ -10,15 +10,11 @@ return [
         'iconClass' => 'bi bi-people',
 
         'cacheDuration' => 3600,
-        'userTable' => '{{%user_users}}',
-        'defaultUserStatus' => 10,
-        'userRolePageSize' => 100,
-        'onlyRegisteredRoute' => false,
-        'strict' => true,
+        'defaultUserStatus' => 0,
+        'onlyRegisteredRoute' => 0,
+        'strict' => 1,
         'globalCacheTag' => 'user.admin',
         'passwordResetTokenExpire' => 3600,
         'rememberMeDuration' => 3600 * 24 * 30,
-
-        'directories' => false, // Если для работы модуля необходимы директории для статики
     ],
 ];

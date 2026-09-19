@@ -6,6 +6,7 @@
  */
 
 use Besnovatyj\User\entities\User;
+use Besnovatyj\User\helpers\UserHelper;
 use yii\bootstrap5\Html;
 use yii\web\View;
 use yii\widgets\ActiveForm;
@@ -19,7 +20,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?php // `value` задаём явно: в атрибуте лежит UserStatus, а Html ждёт скаляр. ?>
+    <?= $form->field($model, 'status')->dropDownList(UserHelper::statusList(), ['value' => $model->status?->value]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('rbac-admin', 'Create') : Yii::t('rbac-admin', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

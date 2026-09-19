@@ -9,8 +9,6 @@ namespace Besnovatyj\User\entities;
 
 use Besnovatyj\DomainEvents\AggregateRoot;
 use Besnovatyj\DomainEvents\EventTrait;
-use DateTimeImmutable;
-use DomainException;
 use Besnovatyj\User\components\Rbac;
 use Besnovatyj\User\components\UserStatus;
 use Besnovatyj\User\entities\events\UserBlocked;
@@ -21,8 +19,11 @@ use Besnovatyj\User\entities\events\UserPasswordResetConfirmed;
 use Besnovatyj\User\entities\events\UserPasswordResetRequested;
 use Besnovatyj\User\entities\events\UserSignUpConfirmed;
 use Besnovatyj\User\entities\events\UserSignUpRequested;
+use DateTimeImmutable;
+use DomainException;
 use Yii;
 use yii\base\Exception;
+use yii\behaviors\AttributeTypecastBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -41,7 +42,7 @@ use yii\db\ActiveRecord;
  * @property string $email_confirm_token
  * @property string $phone
  * @property string $auth_key "remember me" authentication key
- * @property integer $status
+ * @property UserStatus $status
  * @property integer $created_at - `new \DateTimeImmutable()->format('Y.m.d H:i:s')`
  * @property integer $updated_at - `new \DateTimeImmutable()->format('Y.m.d H:i:s')`
  * @property string $password write-only password
@@ -65,7 +66,7 @@ class User extends ActiveRecord implements AggregateRoot
     /**
      * @throws Exception
      */
-    public static function create(string $username, string $email, string $phone, string $description, string $password): self
+    public static function create(string $username, string $email, string $phone, string $description, string $password, UserStatus $status): self
     {
         $user = new User();
         $user->username = preg_replace('/\s+/', '', $username);
@@ -74,7 +75,7 @@ class User extends ActiveRecord implements AggregateRoot
         $user->description = $description;
         $user->setPassword($password);
         $user->created_at = new DateTimeImmutable()->format('Y.m.d H:i:s');
-        $user->status = UserStatus::STATUS_ACTIVE;
+        $user->status = $status;
         $user->generateAuthKey();
         return $user;
     }
@@ -383,6 +384,17 @@ class User extends ActiveRecord implements AggregateRoot
                 'createdAtAttribute' => 'created_at',
                 'updatedAtAttribute' => 'updated_at',
                 'value' => new DateTimeImmutable()->format('Y.m.d H:i:s'),
+            ],
+            [
+                // ActiveRecord читает `status` из БД как int, поэтому без приведения к UserStatus
+                // строгие сравнения в isActive()/isBlocked()/isWait() всегда ложны.
+                // В обратную сторону приведение делает сам Yii (ColumnSchema::dbTypecast понимает BackedEnum).
+                'class' => AttributeTypecastBehavior::class,
+                'attributeTypes' => [
+                    'status' => UserStatus::class,
+                ],
+                'typecastAfterFind' => true,
+                'typecastAfterSave' => true,
             ],
             ...parent::behaviors(),
         ];

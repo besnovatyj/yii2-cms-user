@@ -30,7 +30,8 @@ class UserSearch extends Model
             [['username', 'email', 'role'], 'string'],
             // [['date_from', 'date_to'], 'datetime', 'format' => 'php:Y-m-d H:i:s'],
             [['date_from', 'date_to'], 'datetime', 'format' => 'php:Y-m-d H:i'],
-            ['status', 'in', 'range' => [UserStatus::STATUS_ACTIVE, UserStatus::STATUS_BLOCKED, UserStatus::STATUS_WAIT]],
+            // Сравнение идёт с пришедшей из запроса строкой, поэтому в range — значения, а не сами case'ы.
+            ['status', 'in', 'range' => UserStatus::values()],
         ];
     }
 
