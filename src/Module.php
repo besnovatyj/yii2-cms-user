@@ -38,7 +38,6 @@ class Module extends CmsModule implements
     }
 
     public static function moduleId(): string       { return 'User'; }
-    public static function moduleVersion(): string  { return '1.0.0'; }
     public static function isEditable(): bool       { return true;  }
     public static function moduleConfig(): array    { return require __DIR__.'/config/config.php'; }
     public static function options(): array         { return require __DIR__.'/config/options.php'; }
