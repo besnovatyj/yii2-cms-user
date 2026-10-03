@@ -13,7 +13,8 @@ use Besnovatyj\User\Module;
  *
  * Регистрация модуля + глобальные компоненты (authManager — RBAC-таблицы принадлежат этому модулю).
  * Пер-аппликационные вклады (identityClass, accessAuthorizer, whitelist входа) — в config/{app}.php.
- * Меню/миграции остаются вкладами modman. Значения — из статических методов {@see Module}.
+ * Меню админки — `adminMenu.php` (группа `admin-menu`), миграции — вклад modman.
+ * Значения — из статических методов {@see Module}.
  *
  * URL-правила фронтенда (вход/регистрация/кабинет) — вклад в `frontendUrlManager` группы `common`
  * (см. README_Yii2_Modules.md). Перенесены из захардкоженного `frontend/config/url-manager.php`;
