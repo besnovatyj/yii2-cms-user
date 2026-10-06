@@ -49,7 +49,7 @@
     "besnovatyj/yii2-cms-altcha-widget": "^1.0",
     "besnovatyj/yii2-cms-datetime-widgets": "^1.0",
     "besnovatyj/yii2-cms-oauth2": "^1.0",
-    "besnovatyj/yii2-cms-upload": "^1.0",
+    "besnovatyj/yii2-cms-upload": "^2.0",
     "php": ">=8.4",
     "ext-mbstring": "*",
     "yiisoft/yii2": "~2.0.0",
